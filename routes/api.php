@@ -33,9 +33,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     // $admin->attachPermission($createPost);
 
     // $request->user()->attachRole($admin);
-
-    return [
-        'user' => $request->user(),
-        'permissions' => $request->user()->allPermissions()
-    ];
+    $user = $request->user();
+    $user['permissions'] = $request->user()->allPermissions();
+    return $user;
 });
