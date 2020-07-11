@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
+use App\Model\Role;
 use App\Model\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Company\Company;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -50,7 +52,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'company.name' => ['required', 'string', 'max:255', 'unique:company'],
+            'firstName' => ['required', 'string', 'max:255'],
+            'lastName' => ['required', 'string', 'max:255'],
+            'countryCode' => ['required', 'string', 'max:3'],
+            'phoneNumber' => ['required', 'string', 'max:12'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -64,10 +70,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+        $company = Company::create([
+            'name' => $data['company']['name'],
+            'display_name' => $data['company']['name']
+        ]);
+
+        $user = User::create([
+            'first_name' => $data['firstName'],
+            'last_name' => $data['lastName'],
+            'country_code' => $data['countryCode'],
+            'phone_number' => $data['phoneNumber'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'company_id' => $company->id
         ]);
+
+        $admin = Role::where('name', 'admin')->first();
+        $user->attachRole($admin, $company);
+
+        return $user;
     }
 }
