@@ -17,10 +17,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    $user = $request->user();
-    $user['permissions'] = $request->user()->allPermissions();
-    $user['roles'] = $user->roles;
-    $user['company'] = $user->company;
-    return $user;
+Route::middleware('auth:sanctum')->group(function() {
+
+    Route::get('user', 'UserController@getUser');
+
 });
