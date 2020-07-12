@@ -35,6 +35,11 @@ class LaratrustSetupTables extends Migration
             $table->string('name')->unique();
             $table->string('display_name')->nullable();
             $table->string('description')->nullable();
+            $table->string('address');
+            $table->string('state');
+            $table->string('city');
+            $table->string('country');
+            $table->string('postal_code');
             $table->timestamps();
         });
 
