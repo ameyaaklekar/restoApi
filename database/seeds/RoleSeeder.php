@@ -1,5 +1,6 @@
 <?php
 
+use App\Model\Role;
 use Illuminate\Database\Seeder;
 
 class RoleSeeder extends Seeder
@@ -31,18 +32,14 @@ class RoleSeeder extends Seeder
             [
                 'name' => 'employee',
                 'display_name' => 'Employee'
-            ],
+            ]
         ];
 
         foreach ($roles as $role) {
-            DB::table('roles')->insert(
-                [
-                    'name' => $role['name'],
-                    'display_name' => $role['display_name'],
-                    'created_at' => NOW(),
-                    'updated_at' => NOW()
-                ]
-            );
+            Role::create([
+                'name' => $role['name'],
+                'display_name' => $role['display_name'],
+            ]);
         }
     }
 }

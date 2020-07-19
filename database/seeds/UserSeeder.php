@@ -3,6 +3,7 @@
 use App\Model\Role;
 use App\Model\User;
 use App\Model\Company\Company;
+use App\Model\Permission;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -39,9 +40,14 @@ class UserSeeder extends Seeder
         $user = User::where('id', 1)->get()->first();
         $company = Company::where('id', 1)->get()->first();
 
-        $suderAdmin = Role::where('name', 'superAdmin')->first();
+        $superAdmin = Role::where('name', 'superAdmin')->first();
 
-        $user->attachRole($suderAdmin, $company);
-        
+        $allPermissions = Permission::all();
+
+        foreach ($allPermissions as $permission) {
+            $superAdmin->attachPermission($permission);
+        }
+
+        $user->attachRole($superAdmin, $company);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Model\Permission;
 use Illuminate\Database\Seeder;
 
 class PermissionSeeder extends Seeder
@@ -17,8 +18,8 @@ class PermissionSeeder extends Seeder
                 'display_name' => 'Add Employee'
             ],
             [
-                'name' => 'editEmployee',
-                'display_name' => 'Edit Employee'
+                'name' => 'updateEmployee',
+                'display_name' => 'Update Employee'
             ],
             [
                 'name' => 'deleteEmployee',
@@ -33,8 +34,8 @@ class PermissionSeeder extends Seeder
                 'display_name' => 'Add Branch'
             ],
             [
-                'name' => 'editBranch',
-                'display_name' => 'Edit Branch'
+                'name' => 'updateBranch',
+                'display_name' => 'Update Branch'
             ],
             [
                 'name' => 'deleteBranch',
@@ -45,23 +46,11 @@ class PermissionSeeder extends Seeder
                 'display_name' => 'View Branch'
             ],
             [
-                'name' => 'exportTimesheet',
-                'display_name' => 'Export Timesheet'
+                'name' => 'givePermissions',
+                'display_name' => 'Give Permissions'
             ],
             [
-                'name' => 'addPermissions',
-                'display_name' => 'Add Permissions'
-            ],
-            [
-                'name' => 'editPermissions',
-                'display_name' => 'Edit Permissions'
-            ],
-            [
-                'name' => 'updatePermissions',
-                'display_name' => 'Update Permissions'
-            ],
-            [
-                'name' => 'deletePermissions',
+                'name' => 'removePermissions',
                 'display_name' => 'Delete Permissions'
             ],
             [
@@ -71,10 +60,6 @@ class PermissionSeeder extends Seeder
             [
                 'name' => 'addRoles',
                 'display_name' => 'Add Roles'
-            ],
-            [
-                'name' => 'editRoles',
-                'display_name' => 'Edit Roles'
             ],
             [
                 'name' => 'updateRoles',
@@ -88,17 +73,25 @@ class PermissionSeeder extends Seeder
                 'name' => 'viewRoles',
                 'display_name' => 'View Roles'
             ],
+            [
+                'name' => 'viewCompany',
+                'display_name' => 'View Company'
+            ],
+            [
+                'name' => 'updateCompany',
+                'display_name' => 'Edit Company'
+            ],
+            [
+                'name' => 'deleteCompany',
+                'display_name' => 'Delete Company'
+            ],
         ];
 
         foreach ($permissions as $permission) {
-            DB::table('permissions')->insert(
-                [
-                    'name' => $permission['name'],
-                    'display_name' => $permission['display_name'],
-                    'created_at' => NOW(),
-                    'updated_at' => NOW()
-                ]
-            );
+            Permission::create([
+                'name' => $permission['name'],
+                'display_name' => $permission['display_name']
+            ]);
         }
     }
 }
