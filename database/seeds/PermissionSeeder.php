@@ -85,6 +85,10 @@ class PermissionSeeder extends Seeder
                 'name' => 'deleteCompany',
                 'display_name' => 'Delete Company'
             ],
+            [
+                'name' => 'updateProfile',
+                'display_name' => 'Update Profile'
+            ]
         ];
 
         foreach ($permissions as $permission) {

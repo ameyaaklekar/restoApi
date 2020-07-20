@@ -55,8 +55,8 @@ class RegisterController extends Controller
             'company.name' => ['required', 'string', 'max:255', 'unique:company'],
             'firstName' => ['required', 'string', 'max:255'],
             'lastName' => ['required', 'string', 'max:255'],
-            'countryCode' => ['required', 'string', 'max:3'],
-            'phoneNumber' => ['required', 'string', 'max:12'],
+            'countryCode' => ['required', 'digits_between:1,3'],
+            'phoneNumber' => ['required', 'digits_between:5,12'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
