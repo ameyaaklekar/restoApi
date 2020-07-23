@@ -2,10 +2,11 @@
 
 use App\Model\Role;
 use App\Model\User;
-use App\Model\Company\Company;
 use App\Model\Permission;
+use App\Model\Company\Company;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
