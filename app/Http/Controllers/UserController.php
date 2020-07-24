@@ -66,8 +66,4 @@ class UserController extends Controller
 
         return $user;
     }
-
-    public function addEmployee(Request $request) {
-
-    }
 }
