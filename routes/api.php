@@ -1,9 +1,5 @@
 <?php
 
-use App\Model\Role;
-use App\Model\Permission;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,5 +17,11 @@ Route::middleware('auth:sanctum')->group(function() {
 
     Route::get('user', 'UserController@getUser');
     Route::put('user/update', 'UserController@updateUser');
+    Route::post('user/add-employee', 'UserController@addEmployee');
 
+    Route::get('roles','Roles\RolesController@getRoles');
+
+    Route::get('rolesPermission','Roles\RolesController@getRolesPermission');
+
+    Route::get('permissions','Permissions\PermissionsController@getPermissions');
 });

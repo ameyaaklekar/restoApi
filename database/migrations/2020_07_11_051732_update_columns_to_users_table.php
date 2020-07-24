@@ -20,6 +20,7 @@ class UpdateColumnsToUsersTable extends Migration
             $table->string('country')->nullable()->change();
             $table->string('postal_code')->nullable()->change();
             $table->unsignedInteger('company_id')->nullable()->change();
+            $table->timestamp('password_change_at')->nullable();
         });
     }
 

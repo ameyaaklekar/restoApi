@@ -62,7 +62,26 @@ class RolesPermission extends Seeder
             $manager->attachPermission(Permission::where('name', $permission)->first());
         }
 
+        $supervisorPermissions = [
+            'viewEmployee',
+            'givePermissions',
+            'removePermissions',
+            'viewPermissions',
+            'viewRoles',
+            'viewCompany',
+            'updateProfile'
+        ];
         $supervisor = Role::where('name', 'supervisor')->first();
+        foreach ($supervisorPermissions as $permission) {
+            $supervisor->attachPermission(Permission::where('name', $permission)->first());
+        }
+
+        $employeePermissions = [
+            'viewCompany'
+        ];
         $employee = Role::where('name', 'employee')->first();
+        foreach ($employeePermissions as $permission) {
+            $employee->attachPermission(Permission::where('name', $permission)->first());
+        }
     }
 }
