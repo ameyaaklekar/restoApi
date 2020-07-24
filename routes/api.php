@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->group(function() {
 
     Route::get('roles','Roles\RolesController@getRoles');
 
-    Route::get('rolesPermission','Roles\RolesController@getRolesPermission');
+    Route::get('roles/permission','Roles\RolesController@getRolesPermission');
 
     Route::get('permissions','Permissions\PermissionsController@getPermissions');
 });
