@@ -17,7 +17,8 @@ Route::middleware('auth:sanctum')->group(function() {
 
     Route::get('user', 'UserController@getUser');
     Route::put('user/update', 'UserController@updateUser');
-    Route::post('user/add-employee', 'UserController@addEmployee');
+    
+    Route::post('employee/add', 'Employee\EmployeeController@addEmployee');
 
     Route::get('roles','Roles\RolesController@getRoles');
 
