@@ -23,9 +23,9 @@ class RolesController extends Controller
         return Role::whereRaw('name != ? ', ['superAdmin'])->get();
     }
 
-    public function getRolesPermission(Request $request)
+    public function getRolesPermission(Request $request, $role)
     {
-        $role = Role::where('name', $request['role'])->first();
+        $role = Role::where('name', $role)->first();
         return $role->permissions;
     }
 }
