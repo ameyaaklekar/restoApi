@@ -25,7 +25,7 @@ class RolesController extends Controller
 
     public function getRolesPermission(Request $request)
     {
-        $role = Role::where('name', 'admin')->first();
+        $role = Role::where('name', $request['role'])->first();
         return $role->permissions;
     }
 }
