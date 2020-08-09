@@ -19,9 +19,9 @@ class DatabaseSeeder extends Seeder
         $this->command->info('roles_permission table seeded!');
         $this->call(UserSeeder::class);
         $this->command->info('user table seeded!');
-        $this->call(WeightTypeSeeder::class);
-        $this->command->info('weight_type table seeded!');
         $this->call(GeneralUnitSeeder::class);
         $this->command->info('general_unit table seeded!');
+        $this->call(WeightTypeSeeder::class);
+        $this->command->info('weight_type table seeded!');
     }
 }
