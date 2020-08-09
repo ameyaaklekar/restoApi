@@ -88,7 +88,32 @@ class PermissionSeeder extends Seeder
             [
                 'name' => 'updateProfile',
                 'display_name' => 'Update Profile'
-            ]
+            ],
+            [
+                'name' => 'viewStock',
+                'display_name' => 'View Stock'
+            ],
+            [
+                'name' => 'updateStock',
+                'display_name' => 'Edit Stock'
+            ],
+            [
+                'name' => 'deleteStock',
+                'display_name' => 'Delete Stock'
+            ],
+            [
+                'name' => 'viewSupplier',
+                'display_name' => 'View Supplier'
+            ],
+            [
+                'name' => 'updateSupplier',
+                'display_name' => 'Edit Supplier'
+            ],
+            [
+                'name' => 'deleteSupplier',
+                'display_name' => 'Delete Supplier'
+            ],
+            
         ];
 
         foreach ($permissions as $permission) {
