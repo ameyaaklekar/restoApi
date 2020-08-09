@@ -99,5 +99,6 @@ class EmployeeController extends Controller
 
             return $newUser;
         }
+        // TODO: add an exception for user without Permissions.
     }
 }

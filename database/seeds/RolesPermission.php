@@ -33,7 +33,13 @@ class RolesPermission extends Seeder
             'viewCompany',
             'updateCompany',
             'deleteCompany',
-            'updateProfile'
+            'updateProfile',
+            'viewStock',
+            'updateStock',
+            'deleteStock',
+            'viewSupplier',
+            'updateSupplier',
+            'deleteSupplier',
         ];
 
         
@@ -54,7 +60,9 @@ class RolesPermission extends Seeder
             'viewPermissions',
             'viewRoles',
             'viewCompany',
-            'updateProfile'
+            'updateProfile',
+            'viewStock',
+            'viewSupplier',
         ];
         
         $manager = Role::where('name', 'manager')->first();
