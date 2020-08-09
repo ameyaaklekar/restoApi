@@ -11,17 +11,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call('PermissionSeeder');
+        $this->call(PermissionSeeder::class);
         $this->command->info('permission table seeded!');
-        $this->call('RoleSeeder');
+        $this->call(RoleSeeder::class);
         $this->command->info('roles table seeded!');
-        $this->call('RolesPermission');
+        $this->call(RolesPermission::class);
         $this->command->info('roles_permission table seeded!');
-        $this->call('UserSeeder');
+        $this->call(UserSeeder::class);
         $this->command->info('user table seeded!');
-        $this->call('WeightTypeSeeder');
+        $this->call(WeightTypeSeeder::class);
         $this->command->info('weight_type table seeded!');
-        $this->call('GeneralUnitSeeder');
+        $this->call(GeneralUnitSeeder::class);
         $this->command->info('general_unit table seeded!');
     }
 }
