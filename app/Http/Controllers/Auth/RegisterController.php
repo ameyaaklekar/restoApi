@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Model\Role;
 use App\Model\User;
-use App\Company\Company;
 use App\Model\Permission;
+use App\Model\Company\Company;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
