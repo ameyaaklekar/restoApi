@@ -14,8 +14,8 @@ class AddCompanyIdToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreign('company_id')->references('id')->on('company')
-                ->onUpdate('cascade')->onDelete('cascade');
+            // $table->foreign('company_id')->references('id')->on('company')
+            //     ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -27,7 +27,7 @@ class AddCompanyIdToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign(['company_id']);
+            // $table->dropForeign(['company_id']);
         });
     }
 }

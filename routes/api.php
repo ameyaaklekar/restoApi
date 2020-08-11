@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->group(function() {
 
     Route::get('user', 'UserController@getUser');
+    
     Route::put('user/update', 'UserController@updateUser');
     
     Route::post('employee/add', 'Employee\EmployeeController@addEmployee');
@@ -25,4 +26,9 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('roles/permission/{role}','Roles\RolesController@getRolesPermission');
 
     Route::get('permissions','Permissions\PermissionsController@getPermissions');
+
+    Route::post('suppliers/add', 'Suppliers\SuppliersController@addSupplier');
+
+    Route::get('suppliers/{company}/all', 'Suppliers\SuppliersController@allSupplier');
+
 });

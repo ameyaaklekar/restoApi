@@ -17,9 +17,14 @@ class CreateSupplierTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email');
-            $table->string('address');
             $table->integer('country_code');
             $table->integer('contact');
+            $table->string('address');
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('country')->nullable();
+            $table->string('postal_code')->nullable();
+            $table->string('contact_person')->nullable();
             $table->enum('status', ['A','I','D'])->dafault('A'); //A = Active, I = Inactive, D = Delete
             $table->unsignedInteger('company_id');
             $table->timestamps();

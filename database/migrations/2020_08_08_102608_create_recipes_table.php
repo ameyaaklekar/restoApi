@@ -22,14 +22,14 @@ class CreateRecipesTable extends Migration
             $table->unsignedInteger('stock_id');
             $table->timestamps();
 
-            $table->foreign('product_id')->references('id')->on('product')
-                ->onUpdate('cascade')->onDelete('cascade');
+            // $table->foreign('product_id')->references('id')->on('product')
+            //     ->onUpdate('cascade')->onDelete('cascade');
 
-            $table->foreign('unit_id')->references('id')->on('general_units')
-                ->onUpdate('cascade')->onDelete('cascade');
+            // $table->foreign('unit_id')->references('id')->on('general_units')
+            //     ->onUpdate('cascade')->onDelete('cascade');
 
-            $table->foreign('stock_id')->references('id')->on('stock')
-                ->onUpdate('cascade')->onDelete('cascade');            
+            // $table->foreign('stock_id')->references('id')->on('stock')
+            //     ->onUpdate('cascade')->onDelete('cascade');            
         });
     }
 

@@ -98,7 +98,8 @@ class EmployeeController extends Controller
             }
 
             return $newUser;
+        } else {
+            return $this->errorResponse('User not Authorized to perform this action', 422);
         }
-        // TODO: add an exception for user without Permissions.
     }
 }

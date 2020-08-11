@@ -21,11 +21,11 @@ class CreateUnitsTable extends Migration
             $table->unsignedInteger('company_id');
             $table->timestamps();
 
-            $table->foreign('weight_id')->references('id')->on('weight_type')
-                ->onUpdate('cascade')->onDelete('cascade');
+            // $table->foreign('weight_id')->references('id')->on('weight_type')
+            //     ->onUpdate('cascade')->onDelete('cascade');
 
-            $table->foreign('company_id')->references('id')->on('company')
-                ->onUpdate('cascade')->onDelete('cascade');
+            // $table->foreign('company_id')->references('id')->on('company')
+            //     ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

@@ -90,6 +90,10 @@ class PermissionSeeder extends Seeder
                 'display_name' => 'Update Profile'
             ],
             [
+                'name' => 'addStock',
+                'display_name' => 'Add Stock'
+            ],
+            [
                 'name' => 'viewStock',
                 'display_name' => 'View Stock'
             ],
@@ -100,6 +104,10 @@ class PermissionSeeder extends Seeder
             [
                 'name' => 'deleteStock',
                 'display_name' => 'Delete Stock'
+            ],
+            [
+                'name' => 'addSupplier',
+                'display_name' => 'Add Supplier'
             ],
             [
                 'name' => 'viewSupplier',

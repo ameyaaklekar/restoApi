@@ -11,4 +11,8 @@ class Company extends LaratrustTeam
     public function users() {
         return $this->hasMany('App\Model\User', 'company_id');
     }
+
+    public function suppliers() {
+        return $this->hasMany('App\Model\Suppliers\Suppliers', 'company_id');
+    }
 }
