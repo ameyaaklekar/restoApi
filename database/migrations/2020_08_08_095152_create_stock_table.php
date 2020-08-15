@@ -25,11 +25,11 @@ class CreateStockTable extends Migration
             $table->unsignedInteger('stock_unit_id');
             $table->timestamps();
 
-            $table->foreign('supplier_id')->references('id')->on('suppliers')
-                ->onDelete('cascade');
+            // $table->foreign('supplier_id')->references('id')->on('suppliers')
+            //     ->onDelete('cascade');
 
-            $table->foreign('stock_unit_id')->references('id')->on('stock_units')
-                ->onDelete('cascade');            
+            // $table->foreign('stock_unit_id')->references('id')->on('stock_units')
+            //     ->onDelete('cascade');            
         });
     }
 

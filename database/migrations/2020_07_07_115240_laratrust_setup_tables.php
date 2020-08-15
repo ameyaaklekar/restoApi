@@ -51,10 +51,10 @@ class LaratrustSetupTables extends Migration
             $table->string('user_type');
             $table->unsignedInteger('company_id')->nullable();
 
-            $table->foreign('role_id')->references('id')->on('roles')
-                ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('company_id')->references('id')->on('company')
-                ->onUpdate('cascade')->onDelete('cascade');
+            // $table->foreign('role_id')->references('id')->on('roles')
+            //     ->onUpdate('cascade')->onDelete('cascade');
+            // $table->foreign('company_id')->references('id')->on('company')
+            //     ->onUpdate('cascade')->onDelete('cascade');
 
             $table->unique(['user_id', 'role_id', 'user_type', 'company_id']);
         });
@@ -66,10 +66,10 @@ class LaratrustSetupTables extends Migration
             $table->string('user_type');
             $table->unsignedInteger('company_id')->nullable();
 
-            $table->foreign('permission_id')->references('id')->on('permissions')
-                ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('company_id')->references('id')->on('company')
-                ->onUpdate('cascade')->onDelete('cascade');
+            // $table->foreign('permission_id')->references('id')->on('permissions')
+            //     ->onUpdate('cascade')->onDelete('cascade');
+            // $table->foreign('company_id')->references('id')->on('company')
+            //     ->onUpdate('cascade')->onDelete('cascade');
         });
 
         // Create table for associating permissions to roles (Many-to-Many)
@@ -77,10 +77,10 @@ class LaratrustSetupTables extends Migration
             $table->unsignedInteger('permission_id');
             $table->unsignedInteger('role_id');
 
-            $table->foreign('permission_id')->references('id')->on('permissions')
-                ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('role_id')->references('id')->on('roles')
-                ->onUpdate('cascade')->onDelete('cascade');
+            // $table->foreign('permission_id')->references('id')->on('permissions')
+            //     ->onUpdate('cascade')->onDelete('cascade');
+            // $table->foreign('role_id')->references('id')->on('roles')
+            //     ->onUpdate('cascade')->onDelete('cascade');
 
             $table->primary(['permission_id', 'role_id']);
         });
