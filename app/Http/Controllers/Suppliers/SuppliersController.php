@@ -117,4 +117,67 @@ class SuppliersController extends Controller
 
         return;
     }
+
+    public function getSupplier(Request $request, $supplierId) 
+    {
+        $userId = Auth::id();
+        $user = User::findOrFail($userId);
+
+        $validationRule = [
+            'permission' => ['required', 'string', new CheckPermissions($user)] 
+        ];
+        
+        Validator::make(['permission' => PermissionConst::UPDATE_SUPPLIER], $validationRule)->validate();
+        
+        return Suppliers::where('id', trim(htmlspecialchars($supplierId)))
+            ->where('company_id', $user->company->id)
+            ->first();
+    }
+
+    public function updateSupplier(Request $request) 
+    {
+        $userId = Auth::id();
+        $user = User::findOrFail($userId);
+
+        $validationRule = [
+            'permission' => ['required', 'string', new CheckPermissions($user)] 
+        ];
+        
+        Validator::make(['permission' => PermissionConst::UPDATE_SUPPLIER], $validationRule)->validate();
+
+        $rules = [
+            'countryCode' => ['required', 'digits_between:1,3'],
+            'contact' => ['required', 'digits_between:5,12'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'contactPerson' => ['required', 'string', 'max:255'],
+            'address' => ['string', 'max:255'],
+            'city' => ['string', 'max:255'],
+            'state' => ['string', 'max:255'],
+            'country' => ['string', 'max:255'],
+            'postalCode' => ['string', 'max:255']
+        ];
+
+        $messages = [
+            'required' => 'The :attribute is required.',
+            'max' => 'The :attribute is too long.'
+        ];
+
+        Validator::make($request->all(), $rules, $messages)->validate();
+
+        $supplier = Suppliers::where('id', trim(htmlspecialchars($request->supplierId)))
+            ->where('company_id', $user->company->id)
+            ->update([
+                'country_code' => trim(htmlspecialchars($request->countryCode)),
+                'contact' => trim(htmlspecialchars($request->contact)),
+                'email' => trim(htmlspecialchars($request->email)),
+                'contact_person' => trim(htmlspecialchars($request->contactPerson)),
+                'address' => trim(htmlspecialchars($request->address)),
+                'city' => trim(htmlspecialchars($request->city)),
+                'state' => trim(htmlspecialchars($request->state)),
+                'country' => trim(htmlspecialchars($request->country)),
+                'postal_code' => trim(htmlspecialchars($request->postalCode)),
+            ]);
+
+        return $supplier;
+    }
 }

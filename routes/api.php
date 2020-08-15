@@ -33,4 +33,9 @@ Route::middleware('auth:sanctum')->group(function() {
 
     Route::put('suppliers/update/change-status', 'Suppliers\SuppliersController@changeStatus');
 
+    Route::put('suppliers/update', 'Suppliers\SuppliersController@updateSupplier');
+
+    Route::get('suppliers/{supplierId}/edit', 'Suppliers\SuppliersController@getSupplier');
+
+
 });
