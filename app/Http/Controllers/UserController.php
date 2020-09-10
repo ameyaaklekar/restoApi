@@ -21,7 +21,8 @@ class UserController extends Controller
 
     public function getUser(Request $request)
     {
-        $user = Auth::user();
+        $userId = Auth::id();
+        $user = User::findOrFail($userId);
         $user['permissions'] = $request->user()->allPermissions();
         $user['roles'] = $user->roles;
         $user['company'] = $user->company;
