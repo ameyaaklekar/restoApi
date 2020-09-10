@@ -215,7 +215,7 @@ class EmployeeController extends Controller
                 'postal_code' => trim(htmlspecialchars($request->postalCode)),
             ]);
         
-        $employee = User::findOrFail($request->employeeId);
+        $employee = User::findOrFail(trim(htmlspecialchars($request->employeeId)));
         $employeeRoles = $employee->roles;
         
         if ($employeeRoles[0]->id != $role->id) {
