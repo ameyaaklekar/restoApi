@@ -27,7 +27,7 @@ class SuppliersController extends Controller
         $this->middleware('auth');
     }
 
-    public function allSupplier(Request $request) 
+    public function getAllSupplier(Request $request) 
     {
         $userId = Auth::id();
         $user = User::findOrFail($userId);

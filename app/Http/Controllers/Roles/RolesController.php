@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Roles;
 
-use App\Http\Controllers\Controller;
 use App\Model\Role;
+use App\Model\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class RolesController extends Controller
 {
@@ -20,7 +22,14 @@ class RolesController extends Controller
 
     public function getRoles() 
     {
-        return Role::whereRaw('name != ? ', ['superAdmin'])->get();
+        $userId = Auth::id();
+        $user = User::findOrFail($userId);
+
+        if ($user->hasRole('superAdmin', $user->company->name)) {
+            return Role::all();
+        } else {
+            return Role::whereRaw('name != ? ', ['superAdmin'])->get();
+        }
     }
 
     public function getRolesPermission(Request $request, $role)

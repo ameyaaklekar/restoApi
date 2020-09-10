@@ -15,27 +15,45 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function() {
 
-    Route::get('user', 'UserController@getUser');
+    Route::group(['prefix' => 'user'], function() {
+        Route::get('/', 'UserController@getUser');
     
-    Route::put('user/update', 'UserController@updateUser');
+        Route::put('user/update', 'UserController@updateUser');
+    });
+
+    Route::group(['prefix' => 'employee'], function() {     
+        Route::post('add', 'Employee\EmployeeController@addEmployee');
     
-    Route::post('employee/add', 'Employee\EmployeeController@addEmployee');
+        Route::get('all', 'Employee\EmployeeController@getAllEmployees');
+    
+        Route::get('{employeeId}/edit', 'Employee\EmployeeController@getEmployee');
+    
+        Route::put('update', 'Employee\EmployeeController@updateEmployee');
+    });
 
-    Route::get('roles','Roles\RolesController@getRoles');
+    Route::group(['prefix' => 'roles'], function() {     
+        Route::get('/','Roles\RolesController@getRoles');
+    
+        Route::get('permission/{role}','Roles\RolesController@getRolesPermission');
+    });
 
-    Route::get('roles/permission/{role}','Roles\RolesController@getRolesPermission');
+    Route::group(['prefix' => 'permissions'], function() {     
+        Route::get('/','Permissions\PermissionsController@getPermissions');
+    });
+   
+    Route::group(['prefix' => 'suppliers'], function() {     
+        Route::post('add', 'Suppliers\SuppliersController@addSupplier');
+    
+        Route::get('all', 'Suppliers\SuppliersController@getAllSupplier');
+    
+        Route::put('update/change-status', 'Suppliers\SuppliersController@changeStatus');
+    
+        Route::put('update', 'Suppliers\SuppliersController@updateSupplier');
+    
+        Route::get('{supplierId}/edit', 'Suppliers\SuppliersController@getSupplier');
+    });
 
-    Route::get('permissions','Permissions\PermissionsController@getPermissions');
 
-    Route::post('suppliers/add', 'Suppliers\SuppliersController@addSupplier');
-
-    Route::get('suppliers/all', 'Suppliers\SuppliersController@allSupplier');
-
-    Route::put('suppliers/update/change-status', 'Suppliers\SuppliersController@changeStatus');
-
-    Route::put('suppliers/update', 'Suppliers\SuppliersController@updateSupplier');
-
-    Route::get('suppliers/{supplierId}/edit', 'Suppliers\SuppliersController@getSupplier');
 
 
 });
