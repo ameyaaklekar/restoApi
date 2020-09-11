@@ -2,7 +2,7 @@
 
 namespace App\Constants;
 
-class Permission
+class PermissionConstants
 {
     const ADD_EMPLOYEE = 'addEmployee';
     const UPDATE_EMPLOYEE = "updateEmployee";

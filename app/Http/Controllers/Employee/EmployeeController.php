@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use App\Constants\Permission as PermissionConst;
+use App\Constants\PermissionConstants;
 
 class EmployeeController extends Controller
 {
@@ -34,7 +34,7 @@ class EmployeeController extends Controller
             'permission' => ['required', 'string', new CheckPermissions($user)] 
         ];
 
-        Validator::make(['permission' => PermissionConst::UPDATE_SUPPLIER], $validationRule)->validate();
+        Validator::make(['permission' => PermissionConstants::UPDATE_SUPPLIER], $validationRule)->validate();
 
         $rules = [
             'firstName' => ['required', 'string', 'max:255'],
@@ -110,7 +110,7 @@ class EmployeeController extends Controller
         $userId = Auth::id();
         $user = User::findOrFail($userId);
 
-        if ($user->isAbleTo(PermissionConst::VIEW_EMPLOYEE, $user->company->name)) {
+        if ($user->isAbleTo(PermissionConstants::VIEW_EMPLOYEE, $user->company->name)) {
 
             $userObj = User::join('role_user', 'role_user.user_id', '=', 'users.id')
                 ->join('roles', 'role_user.role_id', '=', 'roles.id')
@@ -140,7 +140,7 @@ class EmployeeController extends Controller
             'permission' => ['required', 'string', new CheckPermissions($user)] 
         ];
         
-        Validator::make(['permission' => PermissionConst::UPDATE_EMPLOYEE], $validationRule)->validate();
+        Validator::make(['permission' => PermissionConstants::UPDATE_EMPLOYEE], $validationRule)->validate();
         
         $user = User::where('id', trim(htmlspecialchars($employeeId)))
             ->where('company_id', $user->company->id)
@@ -161,7 +161,7 @@ class EmployeeController extends Controller
             'permission' => ['required', 'string', new CheckPermissions($user)] 
         ];
         
-        Validator::make(['permission' => PermissionConst::UPDATE_EMPLOYEE], $validationRule)->validate();
+        Validator::make(['permission' => PermissionConstants::UPDATE_EMPLOYEE], $validationRule)->validate();
 
         $rules = [
             'firstName' => ['required', 'string', 'max:255'],
@@ -237,5 +237,36 @@ class EmployeeController extends Controller
         }
 
         return $employee;
+    }
+
+    public function changeStatus(Request $request) 
+    {
+        $userId = Auth::id();
+        $user = User::findOrFail($userId);
+
+        $validationRule = [
+            'permission' => ['required', 'string', new CheckPermissions($user)] 
+        ];
+        
+        Validator::make(['permission' => PermissionConstants::UPDATE_EMPLOYEE], $validationRule)->validate();
+
+        $rules = [
+            'companyId' => ['required', 'integer', 'exists:company,id'],
+            'employeeId' => ['required', 'integer', 'exists:users,id'],
+            'status' => ['required', 'string', 'max:1']
+        ];
+
+        $messages = [
+            'required' => 'The :attribute is required.',
+            'max' => 'Invalid Status'
+        ];
+
+        Validator::make($request->all(), $rules, $messages)->validate();
+        
+        User::where('id', trim(htmlspecialchars($request->employeeId)))
+            ->where('company_id', $user->company->id)
+            ->update(['status' => ($request->status == 'A') ? 'A' : 'I']);
+
+        return;
     }
 }

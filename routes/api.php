@@ -29,6 +29,8 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::get('{employeeId}/edit', 'Employee\EmployeeController@getEmployee');
     
         Route::put('update', 'Employee\EmployeeController@updateEmployee');
+
+        Route::patch('update/change-status', 'Employee\EmployeeController@changeStatus');
     });
 
     Route::group(['prefix' => 'roles'], function() {     
@@ -53,7 +55,8 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::get('{supplierId}/edit', 'Suppliers\SuppliersController@getSupplier');
     });
 
-
-
+    Route::group(['prefix' => 'company'], function() {
+        Route::get('employees', 'Company\CompanyController@getEmployees');
+    });
 
 });

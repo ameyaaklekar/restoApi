@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Permissions;
 
-use App\Http\Controllers\Controller;
+use App\Model\User;
 use App\Model\Permission;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class PermissionsController extends Controller
@@ -21,9 +22,10 @@ class PermissionsController extends Controller
 
     public function getPermissions()
     {
-        $user = Auth::user();
-
-        if ($user->hasRole('superAdmin')) {
+        $userId = Auth::id();
+        $user = User::findOrFail($userId);
+        
+        if ($user->hasRole('superAdmin', $user->company->name)) {
             return Permission::all();
         } else {
             return Permission::whereNotIn('name', ['addRoles', 'updateRoles', 'deleteRoles'])->get();

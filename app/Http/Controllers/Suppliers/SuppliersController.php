@@ -8,7 +8,7 @@ use App\Model\Suppliers\Suppliers;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use App\Constants\Permission as PermissionConst;
+use App\Constants\PermissionConstants;
 use App\Model\Permission;
 use App\Rules\CheckPermissions;
 use App\Rules\UniqueSupplierName;
@@ -32,7 +32,7 @@ class SuppliersController extends Controller
         $userId = Auth::id();
         $user = User::findOrFail($userId);
 
-        if ($user->isAbleTo(PermissionConst::VIEW_SUPPLIER, $user->company->name)) {
+        if ($user->isAbleTo(PermissionConstants::VIEW_SUPPLIER, $user->company->name)) {
             return Suppliers::where('company_id', $user->company->id)
                 ->where('status', '!=', 'D')
                 ->get();
@@ -48,7 +48,7 @@ class SuppliersController extends Controller
             'permission' => ['required', 'string', new CheckPermissions($user)] 
         ];
         
-        Validator::make(['permission' => PermissionConst::ADD_SUPPLIER], $validationRule)->validate();
+        Validator::make(['permission' => PermissionConstants::ADD_SUPPLIER], $validationRule)->validate();
 
         $rules = [
             'name' => ['required', 'string', 'max:255', new UniqueSupplierName($user->company->id)],
@@ -96,7 +96,7 @@ class SuppliersController extends Controller
             'permission' => ['required', 'string', new CheckPermissions($user)] 
         ];
         
-        Validator::make(['permission' => PermissionConst::UPDATE_SUPPLIER], $validationRule)->validate();
+        Validator::make(['permission' => PermissionConstants::UPDATE_SUPPLIER], $validationRule)->validate();
 
         $rules = [
             'companyId' => ['required', 'integer', 'exists:company,id'],
@@ -127,7 +127,7 @@ class SuppliersController extends Controller
             'permission' => ['required', 'string', new CheckPermissions($user)] 
         ];
         
-        Validator::make(['permission' => PermissionConst::UPDATE_SUPPLIER], $validationRule)->validate();
+        Validator::make(['permission' => PermissionConstants::UPDATE_SUPPLIER], $validationRule)->validate();
         
         return Suppliers::where('id', trim(htmlspecialchars($supplierId)))
             ->where('company_id', $user->company->id)
@@ -143,7 +143,7 @@ class SuppliersController extends Controller
             'permission' => ['required', 'string', new CheckPermissions($user)] 
         ];
         
-        Validator::make(['permission' => PermissionConst::UPDATE_SUPPLIER], $validationRule)->validate();
+        Validator::make(['permission' => PermissionConstants::UPDATE_SUPPLIER], $validationRule)->validate();
 
         $rules = [
             'countryCode' => ['required', 'digits_between:1,3'],
