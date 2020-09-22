@@ -19,13 +19,18 @@ return [
         'api/*'
     ],
 
-    'allowed_methods' => ['GET', 'POST', 'PUT', 'PATCH'],
+    'allowed_methods' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
 
     'allowed_origins' => ['*'],
 
     'allowed_origins_patterns' => [],
 
-    'allowed_headers' => ['*'],
+    'allowed_headers' => [
+        'Content-Type',
+        'X-Auth-Token',
+        'Origin',
+        'Authorization',
+    ],
 
     'exposed_headers' => [],
 
