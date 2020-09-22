@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Model\Role;
 use App\Model\User;
-use App\Model\Permission;
+use Illuminate\Http\Request;
 use App\Model\Company\Company;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -44,15 +44,9 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
+    protected function register(Request $request)
     {
-        return Validator::make($data, [
+        Validator::make($request->all(), [
             'company.name' => ['required', 'string', 'max:255', 'unique:company'],
             'firstName' => ['required', 'string', 'max:255'],
             'lastName' => ['required', 'string', 'max:255'],
@@ -61,28 +55,19 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
-    }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Model\User
-     */
-    protected function create(array $data)
-    {
         $company = Company::create([
-            'name' => $data['company']['name'],
-            'display_name' => $data['company']['name']
+            'name' => $request['company']['name'],
+            'display_name' => $request['company']['name']
         ]);
 
         $user = User::create([
-            'first_name' => $data['firstName'],
-            'last_name' => $data['lastName'],
-            'country_code' => $data['countryCode'],
-            'phone_number' => $data['phoneNumber'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'first_name' => $request['firstName'],
+            'last_name' => $request['lastName'],
+            'country_code' => $request['countryCode'],
+            'phone_number' => $request['phoneNumber'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
             'company_id' => $company->id
         ]);
 
