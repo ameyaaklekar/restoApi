@@ -19,7 +19,14 @@ return [
         'api/*'
     ],
 
-    'allowed_methods' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    'allowed_methods' => [
+        'POST',
+        'GET',
+        'OPTIONS',
+        'PUT',
+        'PATCH',
+        'DELETE',    
+    ],
 
     'allowed_origins' => ['*'],
 
