@@ -30,8 +30,9 @@ class CompanyController extends Controller
             $userObj = User::join('role_user', 'role_user.user_id', '=', 'users.id')
                 ->join('roles', 'role_user.role_id', '=', 'roles.id')
                 ->where('users.company_id', $user->company->id)
-                ->where('users.status', '!=', 'D');
-
+                ->where('users.status', '!=', 'D')
+                ->select('users.*');
+            
             if (!$user->hasRole('superAdmin', $user->company->name)) {
                 $userObj->where('roles.name', '!=', 'superAdmin');
             }
