@@ -29,10 +29,5 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        Gate::define(PermissionConstants::VIEW_SUPPLIER, function ($user) {
-            return $user->isAbleTo(PermissionConstants::VIEW_SUPPLIER, $user->company->name) ? 
-                Response::allow() : Response::deny('User not authorized for this action');
-        });
     }
 }
