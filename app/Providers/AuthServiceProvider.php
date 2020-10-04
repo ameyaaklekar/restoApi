@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Constants\PermissionConstants;
+use App\Model\Suppliers\Suppliers;
+use App\Policies\SupplierPolicy;
+use Illuminate\Auth\Access\Response;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -14,6 +18,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Model' => 'App\Policies\ModelPolicy',
+        Suppliers::class => SupplierPolicy::class
     ];
 
     /**
@@ -25,6 +30,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define(PermissionConstants::VIEW_SUPPLIER, function ($user) {
+            return $user->isAbleTo(PermissionConstants::VIEW_SUPPLIER, $user->company->name) ? 
+                Response::allow() : Response::deny('User not authorized for this action');
+        });
     }
 }
